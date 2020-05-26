@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+import 'enums.dart';
+
 import 'content_card.dart';
-import 'select_gender_card.dart';
-
-import 'gender.dart';
-
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0xFFEB1555);
-
-const bottomContainerHeight = 80.0;
+import 'gender_card.dart';
+import 'height_card.dart';
+import 'number_content_card.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -18,6 +15,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender usersGender;
+  int height = 170;
+  int weight = 55;
+  int age = 28;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +26,7 @@ class _InputPageState extends State<InputPage> {
         title: Center(child: Text('BMI CALCULATOR')),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -38,9 +39,9 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     backgroundColor: usersGender == Gender.MALE
-                        ? activeCardColor
-                        : inactiveCardColor,
-                    childCard: SelectGenderCard(
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    childCard: GenderCard(
                       gender: Gender.MALE,
                     ),
                   ),
@@ -53,9 +54,9 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     backgroundColor: usersGender == Gender.FEMALE
-                        ? activeCardColor
-                        : inactiveCardColor,
-                    childCard: SelectGenderCard(
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
+                    childCard: GenderCard(
                       gender: Gender.FEMALE,
                     ),
                   ),
@@ -65,7 +66,15 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ContentCard(
-              backgroundColor: activeCardColor,
+              backgroundColor: kActiveCardColor,
+              childCard: HeightCard(
+                height: height,
+                onSliderChanged: (value) {
+                  setState(() {
+                    height = value.round();
+                  });
+                },
+              ),
             ),
           ),
           Expanded(
@@ -73,22 +82,50 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ContentCard(
-                    backgroundColor: activeCardColor,
+                    backgroundColor: kActiveCardColor,
+                    childCard: NumberContentCard(
+                        contentLabel: 'WEIGHT',
+                        contentUnit: 'kg',
+                        contentNumber: weight,
+                        onMinusButtonPressed: () {
+                          setState(() {
+                            weight--;
+                          });
+                        },
+                        onPlusButtonPressed: () {
+                          setState(() {
+                            weight++;
+                          });
+                        }),
                   ),
                 ),
                 Expanded(
                   child: ContentCard(
-                    backgroundColor: activeCardColor,
+                    backgroundColor: kActiveCardColor,
+                    childCard: NumberContentCard(
+                        contentLabel: 'AGE',
+                        contentUnit: '',
+                        contentNumber: age,
+                        onMinusButtonPressed: () {
+                          setState(() {
+                            age--;
+                          });
+                        },
+                        onPlusButtonPressed: () {
+                          setState(() {
+                            age++;
+                          });
+                        }),
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: bottomContainerColor,
+            color: kAccentColor,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           )
         ],
       ),

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'gender.dart';
+import 'constants.dart';
+import 'enums.dart';
 
-const labelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: Color(0xFF8D8E98),
-);
-
-class SelectGenderCard extends StatelessWidget {
-  SelectGenderCard({
+class GenderCard extends StatelessWidget {
+  GenderCard({
     @required this.gender,
   });
 
@@ -31,7 +27,7 @@ class SelectGenderCard extends StatelessWidget {
         ),
         Text(
           gender.toString().split('.')[1],
-          style: labelTextStyle,
+          style: kLabelTextStyle,
         )
       ],
     );
