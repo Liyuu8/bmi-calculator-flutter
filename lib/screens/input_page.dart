@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
-import 'enums.dart';
+import '../constants.dart';
+import '../enums.dart';
 
-import 'content_card.dart';
-import 'gender_card.dart';
-import 'height_card.dart';
-import 'number_content_card.dart';
+import '../calculator_brain.dart';
+
+import '../components/content_card.dart';
+import '../components/gender_card.dart';
+import '../components/height_card.dart';
+import '../components/number_content_card.dart';
+import '../components/bottom_button.dart';
+
+import 'results_page.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -121,12 +126,26 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kAccentColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-          )
+          BottomButton(
+            buttonTitle: 'CALCULATE',
+            onTap: () {
+              CalculatorBrain calc = CalculatorBrain(
+                height: height,
+                weight: weight,
+              );
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(
+                    bmiResult: calc.getResult(),
+                    bmiResultText: calc.getResultText(),
+                    interpretation: calc.getInterpretation(),
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import '../constants.dart';
 import 'plus_or_minus_round_icon_button.dart';
 
 class NumberContentCard extends StatelessWidget {
-  NumberContentCard(
-      {@required this.contentLabel,
-      @required this.contentUnit,
-      @required this.contentNumber,
-      @required this.onMinusButtonPressed,
-      @required this.onPlusButtonPressed});
+  NumberContentCard({
+    @required this.contentLabel,
+    @required this.contentUnit,
+    @required this.contentNumber,
+    @required this.onMinusButtonPressed,
+    @required this.onPlusButtonPressed,
+  });
 
   final String contentLabel;
   final String contentUnit;

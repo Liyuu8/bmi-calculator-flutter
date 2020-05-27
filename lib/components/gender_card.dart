@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'constants.dart';
-import 'enums.dart';
+import '../constants.dart';
+import '../enums.dart';
 
 class GenderCard extends StatelessWidget {
-  GenderCard({
-    @required this.gender,
-  });
+  GenderCard({@required this.gender});
 
   final Gender gender;
 
